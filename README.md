@@ -11,7 +11,7 @@
 
 1. Ntuples_DYtoLL_Spring15.txt: Example list of ntuple files for inclusive DY-->ll+jets sample, from the Spring.
  
-2. SAMPLES_LIST.txt: List with the names of the processes you want to run over (e.g  DY-->ll+jets, W+jets, ttbar etc.). <br> 
+2. SAMPLES_LIST.txt: List with the names of the processes you want to run over (e.g  DY-->ll+jets, W+jets, ttbar etc.). 
 The name of the processes should match the name of each list of files you want to run over.
 
 3. run_samples_list.sh: script to iterate over the SAMPLES_LIST.txt. The script passes the process name to the run_code.sh script.
