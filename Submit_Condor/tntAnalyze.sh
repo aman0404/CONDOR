@@ -53,7 +53,10 @@ ls ${_CONDOR_SCRATCH_DIR}
 #Copy the output to your EOS area, e.g:
 #xrdcp $_CONDOR_SCRATCH_DIR/muonToTauFakeRate/$outputfile  root://cmseos.fnal.gov//store/user/florez/TNT_Analyzer_Condor/$outputdir
 
-xrdcp $_CONDOR_SCRATCH_DIR/CHANGE_THIS_FOR_ANALYSIS_DIRECTORY/$outputfile root://cmseos.fnal.gov//store/user/florez/YOUR_OUTPUT_DIRECTORY/$outputdir
+# YOU NEED TO MAKE SURE TO CHANGE "USERNAME" BY YOUR USERNAME AND YOU NEED TO MAKE THE "YOUR_OUTPUT_DIRECTORY" and "$outputdir"
+# in your EOS area, e.g: make -r /eos/uscms/store/user/USERNAME/YOUR_OUTPUT_DIRECTORY/Ntuples_DYtoLL_Spring15
+# Notice the $outputdir should matche the name of the list you are passing to the code, in this case "Ntuples_DYtoLL_Spring15" 
+xrdcp $_CONDOR_SCRATCH_DIR/CHANGE_THIS_FOR_ANALYSIS_DIRECTORY/$outputfile root://cmseos.fnal.gov//store/user/USERNAME/YOUR_OUTPUT_DIRECTORY/$outputdir
 
 cd ${_CONDOR_SCRATCH_DIR}
 rm -rf CHANGE_THIS_FOR_ANALYSIS_DIRECTORY
