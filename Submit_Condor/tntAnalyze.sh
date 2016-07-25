@@ -21,22 +21,21 @@ date
 #Also, please read the carefully the comments below.
 
 # "cd" to the are where you have installed your CMSSW release, e.g:
-# e.g. cd /uscms_data/d2/florez/TagAndProbe_BSM3G_TNT_Analyzer/CMSSW_7_4_1/src
-
-cd /uscms_data/d2/freddy06/CMSSW_7_4_15/src/
-source /cvmfs/cms.cern.ch/cmsset_default.sh
+cd /uscms_data/d2/florez/TNT_Maker_CMSSW_8_0_10/CMSSW_8_0_10/src/ 
+source /cvmfs/cms.cern.ch/cmsset_default.csh
+cmsenv
 eval `scram runtime -sh`
 echo $_CONDOR_SCRATCH_DIR
 cd ${_CONDOR_SCRATCH_DIR}
 
 # Copy the directory where you have the compiled code, e.g.:
 # cp -r /uscms_data/d2/florez/TagAndProbe_BSM3G_TNT_Analyzer/CMSSW_7_4_1/src/Fermilab_TauHAT2015/muonToTauFakeRate . 
-cp -r /uscms_data/d2/freddy06/CMSSW_7_4_15/src/Analyzer/BSM3G_TNT_MainAnalyzer .
+cp -r /uscms_data/d2/florez/TNT_Maker_CMSSW_8_0_10/CMSSW_8_0_10/src/Analyzer .
 
 # "cd" in to the analysos code directory, e.g:
 # cd muonToTauFakeRate
-cd BSM3G_TNT_MainAnalyzer/ZprimeTauTauAnalysis_SRandWCR_IsolatedTau
-./BSM3GAnalyzer $fname $outputfile
+cd Analyzer
+./Analyzer $fname $outputfile
 
 echo "LIST BEFORE MOVING"
 ls ${_CONDOR_SCRATCH_DIR}
@@ -53,10 +52,13 @@ ls ${_CONDOR_SCRATCH_DIR}
 #Copy the output to your EOS area, e.g:
 #xrdcp $_CONDOR_SCRATCH_DIR/muonToTauFakeRate/$outputfile  root://cmseos.fnal.gov//store/user/florez/TNT_Analyzer_Condor/$outputdir
 
-xrdcp $_CONDOR_SCRATCH_DIR/BSM3G_TNT_MainAnalyzer/ZprimeTauTauAnalysis_SRandWCR_IsolatedTau/$outputfile root://cmseos.fnal.gov//store/user/freddy06/ZprimeTauTau_13TeV/$outputdir
+# YOU NEED TO MAKE SURE TO CHANGE "USERNAME" BY YOUR USERNAME AND YOU NEED TO MAKE THE "YOUR_OUTPUT_DIRECTORY" and "$outputdir"
+# in your EOS area, e.g: make -r /eos/uscms/store/user/USERNAME/YOUR_OUTPUT_DIRECTORY/Ntuples_DYtoLL_Spring15
+# Notice the $outputdir should matche the name of the list you are passing to the code, in this case "Ntuples_DYtoLL_Spring15"
+xrdcp $_CONDOR_SCRATCH_DIR/Analyzer/$outputfile root://cmseos.fnal.gov//store/user/florez/TNT_Analyzer_Condor/$outputdir
 
 cd ${_CONDOR_SCRATCH_DIR}
-rm -rf BSM3G_TNT_MainAnalyzer
+rm -rf Analyzer
 
 echo "List after moving/removing everything"
 ls ${_CONDOR_SCRATCH_DIR}
